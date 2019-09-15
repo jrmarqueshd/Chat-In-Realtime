@@ -18,6 +18,10 @@ let messages = [];
 
 io.on("connection", (socket)=>{
     console.log(socket.id);
+    
+    socket.on("disconnect", (offSocket)=>{
+        console.log(offSocket);
+    });
 
     socket.on("sendNewMessage", (newMessage)=>{
         messages.push(newMessage);
