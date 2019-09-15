@@ -18,7 +18,7 @@
     </section>
 
     <script>
-        const socket = io();
+        const socket = window.location.href == "http://localhost:3000" ? io("http://localhost:3000") : io();
 
         function renderMessage(author, message){
             const $messageField = document.getElementById("messages");
