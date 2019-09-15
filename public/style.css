@@ -1,0 +1,80 @@
+*{
+    box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    text-decoration: none;
+}
+
+body{
+    background-color: #6d44cc;
+    color: #fff;
+    display: flex;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+            align-items: center;
+            justify-content: center;
+    height: 100vh;
+}
+
+section{
+    background-color: #fdfffd;
+    border-radius: 5px;
+    display: flex;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+            align-items: center;
+            flex-wrap: wrap;
+                -ms-flex-wrap: wrap;
+    overflow: hidden;
+    width: 100%;
+        max-width: 400px;
+}
+
+section #messages{
+    color: #000;
+    display: flex;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+            flex-direction: column;
+    height: 400px;
+    padding: 15px;
+    width: 100%;
+    flex: 1;
+}
+
+section #messages div{
+    padding: 5px 0;
+}
+
+section input,
+section button{
+    padding: 10px 15px;
+    width: 100%;
+}
+
+section #messages,
+section input{
+    border: 1px solid #ccc;
+}
+
+section button{
+    background: #6d44cc;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: all 98.7ms ease;
+        -moz-transition: all 98.7ms ease;
+        -o-transition: all 98.7ms ease;
+        -webkit-transition: all 98.7ms ease;
+}
+
+section button:hover{
+    background: #fff;
+    color: #6d44cc;
+}
+

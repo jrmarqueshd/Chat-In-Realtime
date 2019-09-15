@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat Legal e Bonito</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.4/socket.io.js"></script>
+
+</head>
+<body>
+    <section>
+        <input id="username" type="text" placeholder="Digite o seu usuário" autocomplete="off" />
+        <div id="messages"></div>
+        <input id="message" type="text" placeholder="Digite a sua mensagem" autocomplete="off" />
+        <button id="btn">Enviar</button>
+    </section>
+
+    <script>
+        const socket = io("http://localhost:3000");
+
+        function renderMessage(author, message){
+            const $messageField = document.getElementById("messages");
+
+            $messageField.insertAdjacentHTML("afterbegin", "<div><strong>"+author+"</strong>:"+message+"</div>");
+        }
+
+        socket.on("allMessages", (messages)=>{
+            [].forEach.call(messages, (eachMessage)=>{
+                renderMessage(eachMessage.usr, eachMessage.message);
+            });
+        });
+
+        socket.on("receivedANewMessage", (newMessage)=>{
+            renderMessage(newMessage.usr, newMessage.message);
+        });
+
+        const $btn = document.getElementById("btn");
+
+        $btn.addEventListener("click", (e)=>{
+            e.preventDefault();
+
+            const $usr = document.getElementById("username");
+            const $message = document.getElementById("message");
+
+            if($usr.value.length && $message.value.length){
+                let messageObject = {
+                    usr: $usr.value,
+                    message: $message.value,
+                } 
+                renderMessage(messageObject.usr, messageObject.message);
+
+                socket.emit("sendNewMessage", messageObject);
+            }
+        });
+
+    </script>
+</body>
+</html>
