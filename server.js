@@ -27,4 +27,4 @@ io.on("connection", (socket)=>{
     socket.emit("allMessages", messages);
 });
 
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT);
