@@ -9,6 +9,7 @@
     "wsserver": "ws --log.format dev"
   },
   "dependencies": {
+    "dotenv": "^8.1.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "socket.io": "^2.2.0"

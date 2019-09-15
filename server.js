@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
@@ -11,7 +12,6 @@ app.set("view engine", "html");
 
 app.use("/", (req, res)=>{
     res.render("index.html");
-    
 });
 
 let messages = [];
@@ -27,4 +27,4 @@ io.on("connection", (socket)=>{
     socket.emit("allMessages", messages);
 });
 
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
