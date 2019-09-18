@@ -33,6 +33,10 @@ section{
         max-width: 400px;
 }
 
+section span p{
+    color: #000;
+}
+
 section #messages{
     color: #000;
     display: flex;

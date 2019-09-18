@@ -15,10 +15,20 @@ app.use("/", (req, res)=>{
 });
 
 let messages = [];
+let users = [];
+let index2 = 0;
+
+io.engine.generateId = (newId) =>{
+    return index2++;
+}
 
 io.on("connection", (socket)=>{
-    console.log(socket.id);
-    
+    console.log(socket);
+    socket.emit("id", socket.id);
+    users.push(socket.id);
+
+    socket.broadcast.emit("usersConnect", users);
+
     socket.on("disconnect", (offSocket)=>{
         console.log(offSocket);
     });
