@@ -15,28 +15,26 @@ app.use("/", (req, res)=>{
 });
 
 let messages = [];
-let users = [];
-let index2 = 0;
-
-io.engine.generateId = (newId) =>{
-    return index2++;
-}
 
 io.on("connection", (socket)=>{
-    console.log(socket);
-    socket.emit("id", socket.id);
-    users.push(socket.id);
+    console.log(socket.id);
 
-    socket.broadcast.emit("usersConnect", users);
+    socket.on("userName", (usr)=>{
+        socket.username = usr;
 
-    socket.on("disconnect", (offSocket)=>{
-        console.log(offSocket);
+        socket.broadcast.emit("messageNewUser", usr);
+
+        socket.on("disconnect", (offSocket)=>{
+            console.log(offSocket);
+            socket.broadcast.emit("leftUser", usr);
+        });
+    
+        socket.on("sendNewMessage", (newMessage)=>{
+            messages.push(newMessage);
+            socket.broadcast.emit("receivedANewMessage", newMessage);
+        });
     });
 
-    socket.on("sendNewMessage", (newMessage)=>{
-        messages.push(newMessage);
-        socket.broadcast.emit("receivedANewMessage", newMessage);
-    });
 
     socket.emit("allMessages", messages);
 });

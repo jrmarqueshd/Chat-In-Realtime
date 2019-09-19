@@ -33,6 +33,26 @@ section{
         max-width: 400px;
 }
 
+section > div{
+    flex: 1;
+}
+
+section label{
+    color: #000;
+    display: flex;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+            align-items: center;
+}
+
+section label span{
+    padding: 0 15px;
+}
+
+#form.-off{
+    display: none;
+}
+
 section span p{
     color: #000;
 }
@@ -42,7 +62,7 @@ section #messages{
     display: flex;
         display: -webkit-flex;
         display: -ms-flexbox;
-            flex-direction: column;
+            flex-direction: column-reverse;
     height: 400px;
     padding: 15px;
     width: 100%;

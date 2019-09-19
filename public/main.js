@@ -2,23 +2,26 @@ const socket = window.location.href == "http://localhost:3000" ? io("http://loca
 const $btn = document.getElementById("btn");
 const $usr = document.getElementById("username");
 const $message = document.getElementById("message");
-const $users = document.getElementById("users");
+const $usrButton = document.getElementById("usrButton");
+const $form = document.getElementById("form");
+const $name = document.getElementById("name");
+
+$usrButton.addEventListener("click", ()=>{
+    if($usr.value.length){
+        $usrButton.style.display = "none";
+        $usr.style.display = "none";
+        $form.classList.remove("-off");
+        $name.innerText = $usr.value;
+        
+        socket.emit("userName", $usr.value);
+    }
+});
 
 function renderMessage(author, message) {
     const $messageField = document.getElementById("messages");
 
     $messageField.insertAdjacentHTML("afterbegin", "<div><strong>" + author + "</strong>:" + message + "</div>");
 }
-
-socket.on("id", (socketId)=>{
-    $usr.value = socketId;
-});
-
-socket.on("usersConnect", (users)=>{
-    [].forEach.call(users, (each)=>{
-        $users.innerText = each+", ";
-    });
-});
 
 socket.on("allMessages", (messages) => {
     [].forEach.call(messages, (eachMessage) => {
@@ -29,6 +32,15 @@ socket.on("allMessages", (messages) => {
 socket.on("receivedANewMessage", (newMessage) => {
     renderMessage(newMessage.usr, newMessage.message);
 });
+
+socket.on("messageNewUser", (newUser)=>{
+    renderMessage(newUser, "Entrou.");
+});
+
+socket.on("leftUser", (userLeft)=>{
+    renderMessage(userLeft, "saiu.");
+});
+
 
 $btn.addEventListener("click", (e) => {
     e.preventDefault();

@@ -11,9 +11,15 @@
 <body>
     <section>
         <input id="username" type="text" placeholder="Digite o seu usuário" autocomplete="off" />
-        <div id="messages"></div>
-        <input id="message" type="text" placeholder="Digite a sua mensagem" autocomplete="off" />
-        <button id="btn">Enviar</button>
+        <button id="usrButton">Definir nome</button>
+        <div id="form" class="-off">
+            <div id="messages"></div>
+            <label>
+                <span id="name"></span>
+                <input id="message" type="text" placeholder="Digite a sua mensagem" autocomplete="off" />
+            </label>
+            <button id="btn">Enviar</button>
+        </div>
     </section>
     <script src="main.js"></script>
 </body>
