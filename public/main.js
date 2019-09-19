@@ -47,10 +47,7 @@ socket.on("leftUser", (userLeft)=>{
     renderMessage(`(${userLeft.date}) ${userLeft.hour} - ${userLeft.usr}`, "Saiu.");
 });
 
-
-$btn.addEventListener("click", (e) => {
-    e.preventDefault();
-
+function sendMessage(){
     if ($usr.value.length && $message.value.length) {
         let messageObject = {
             usr: $usr.value,
@@ -59,5 +56,18 @@ $btn.addEventListener("click", (e) => {
         renderMessage(messageObject.usr, messageObject.message);
 
         socket.emit("sendNewMessage", messageObject);
+    }
+    $message.value = "";
+}
+
+let activeButton = $btn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    sendMessage();
+});
+
+window.addEventListener("keydown", (e)=>{
+    if(e.key == "Enter"){
+        sendMessage();
     }
 });
