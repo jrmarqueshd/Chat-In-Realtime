@@ -7,20 +7,14 @@
     <title>Chat Legal e Bonito</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.4/socket.io.js"></script>
-
 </head>
 <body>
     <section>
-        <span>
-            <p>Usuários conectados:</p>
-            <p id="users"></p>
-        </span>
-        <input id="username" socketId="" type="text" placeholder="Digite o seu usuário" autocomplete="off" />
+        <input id="username" type="text" placeholder="Digite o seu usuário" autocomplete="off" />
         <div id="messages"></div>
         <input id="message" type="text" placeholder="Digite a sua mensagem" autocomplete="off" />
         <button id="btn">Enviar</button>
     </section>
-
     <script src="main.js"></script>
 </body>
 </html>
