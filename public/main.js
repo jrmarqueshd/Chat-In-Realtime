@@ -12,8 +12,14 @@ $usrButton.addEventListener("click", ()=>{
         $usr.style.display = "none";
         $form.classList.remove("-off");
         $name.innerText = $usr.value;
-        
-        socket.emit("userName", $usr.value);
+        let date = new Date();
+        let momentConnect = {
+            date: `${date.getDate()}/${date.getMonth()}`,
+            hour: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+            usr: $usr.value
+        }
+
+        socket.emit("userName", momentConnect);
     }
 });
 
@@ -34,11 +40,11 @@ socket.on("receivedANewMessage", (newMessage) => {
 });
 
 socket.on("messageNewUser", (newUser)=>{
-    renderMessage(newUser, "Entrou.");
+    renderMessage(`(${newUser.date}) ${newUser.hour} - ${newUser.usr}`, "Entrou.");
 });
 
 socket.on("leftUser", (userLeft)=>{
-    renderMessage(userLeft, "saiu.");
+    renderMessage(`(${userLeft.date}) ${userLeft.hour} - ${userLeft.usr}`, "Saiu.");
 });
 
 

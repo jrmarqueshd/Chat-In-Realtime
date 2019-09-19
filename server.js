@@ -19,14 +19,14 @@ let messages = [];
 io.on("connection", (socket)=>{
     console.log(socket.id);
 
-    socket.on("userName", (usr)=>{
-        socket.username = usr;
+    socket.on("userName", (momentConnect)=>{
+        socket.username = momentConnect.usr;
 
-        socket.broadcast.emit("messageNewUser", usr);
+        socket.broadcast.emit("messageNewUser", momentConnect);
 
         socket.on("disconnect", (offSocket)=>{
             console.log(offSocket);
-            socket.broadcast.emit("leftUser", usr);
+            socket.broadcast.emit("leftUser", momentConnect);
         });
     
         socket.on("sendNewMessage", (newMessage)=>{
@@ -34,7 +34,6 @@ io.on("connection", (socket)=>{
             socket.broadcast.emit("receivedANewMessage", newMessage);
         });
     });
-
 
     socket.emit("allMessages", messages);
 });
