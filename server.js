@@ -35,8 +35,6 @@ io.on("connection", (socket)=>{
         });
     });
 
-    console.log(messages);
-
     socket.emit("allMessages", messages);
 });
 
