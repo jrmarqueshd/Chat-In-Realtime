@@ -26,7 +26,7 @@ $usrButton.addEventListener("click", ()=>{
 function renderMessage(author, message) {
     const $messageField = document.getElementById("messages");
 
-    $messageField.insertAdjacentHTML("afterbegin", "<div><strong>" + author + "</strong>:" + message + "</div>");
+    $messageField.insertAdjacentHTML("afterbegin", "<div><strong>" + author + "</strong>: " + message + "</div>");
 }
 
 socket.on("allMessages", (messages) => {
@@ -36,7 +36,7 @@ socket.on("allMessages", (messages) => {
 });
 
 socket.on("receivedANewMessage", (newMessage) => {
-    renderMessage(newMessage.usr, newMessage.message);
+    renderMessage(`(${newMessage.hour}) ${newMessage.usr}`, newMessage.message);
 });
 
 socket.on("messageNewUser", (newUser)=>{
@@ -49,18 +49,20 @@ socket.on("leftUser", (userLeft)=>{
 
 function sendMessage(){
     if ($usr.value.length && $message.value.length) {
+        let date = new Date();
         let messageObject = {
+            hour: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,          
             usr: $usr.value,
             message: $message.value,
         }
-        renderMessage(messageObject.usr, messageObject.message);
+        renderMessage(`(${messageObject.hour}) ${messageObject.usr}`, messageObject.message);
 
         socket.emit("sendNewMessage", messageObject);
     }
     $message.value = "";
 }
 
-let activeButton = $btn.addEventListener("click", (e) => {
+$btn.addEventListener("click", (e) => {
     e.preventDefault();
 
     sendMessage();
