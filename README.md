@@ -3,7 +3,7 @@ _Esse é um projeto criado somente para estudo!_
 
 Desenvolvido e mantido por [Junior Marques](https://github.com/jrmarqueshd)
 
-Versão: 1.0.0
+Versão: 1.2.0
 
 Tipo de licença: [MIT](#Sobre-a-licença)
 
